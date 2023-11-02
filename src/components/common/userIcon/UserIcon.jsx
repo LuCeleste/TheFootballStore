@@ -1,7 +1,7 @@
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import DrawerContainer from "../drawer/DrawerContainer";
 
 // import styles from "./UserIcon.module.css";
