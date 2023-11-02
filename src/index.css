@@ -42,6 +42,11 @@
   --font-urae: "urae";
   --font-fneue: "frontpageneue";
   --font-bebas: "Bebas Neue";
+
+  --toastify-color-light: black !important;
+  --toastify-text-color-light: white !important;
+  --toastify-color-error: red !important;
+
 }
 
 h1 {
@@ -70,15 +75,22 @@ a {
 .MuiBreadcrumbs-separator {
   color: var(--main);
 }
-/* .MuiNativeSelect-root{
-  color: 'white';
-  background-color: #000000;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
 }
-.MuiNativeSelect-select{
-  color: 'white';
-  background-color: #000000;
+
+.Toastify__toast{
+  font-family: var(--font-fneue) !important;
+  padding: 0 !important;
+  height: 67px !important;
+  background: black;
+  height: fit-content;
+  border: 1px solid white;
+  border-radius: 2%;
 }
-.MuiNativeSelect-outlined{
-  color: 'white';
-  background-color: #000000;
-} */
+
+.MuiList-root{
+  background-color: black;
+} 

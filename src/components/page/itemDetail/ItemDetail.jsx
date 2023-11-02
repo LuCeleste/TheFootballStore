@@ -2,26 +2,40 @@ import {
   Box,
   Button,
   Divider,
+  Menu,
   MenuItem,
-  Select,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Image } from "react-bootstrap";
 import SizeButton from "../../common/sizeButton/SizeButton";
 import styles from "./ItemDetail.module.css";
+import { ToastContainer } from "react-toastify";
 
 const ItemDetail = ({ item, agregarAlCarrito }) => {
   const [sizeOption, setSizeOption] = useState("");
-  const [selectOption, setSelectOption] = useState("");
+  const quantityRef = useRef();
+  const [selectOption, setSelectOption] = useState("No");
 
-  const handleChange = (event) => {
-    console.log(event.target.value);
-    setSelectOption(event.target.value);
+  // const handleChange = (event) => {
+  //   console.log(event.target.value);
+  //   setSelectOption(event.target.value);
+  // };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClickSelect = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    console.log(event.target.attributes.value?.nodeValue);
+    event.target.attributes.value?.nodeValue
+      ? setSelectOption(event.target.attributes.value.nodeValue)
+      : null;
+    setAnchorEl(null);
   };
 
-  // console.log(selectRef.current.value);
   return (
     <Box
       sx={{
@@ -64,7 +78,7 @@ const ItemDetail = ({ item, agregarAlCarrito }) => {
           flexDirection: "column",
           justifyContent: "space-around",
           width: "400px",
-          gap: "10px",
+          gap: "17px",
         }}
       >
         <Typography
@@ -155,50 +169,76 @@ const ItemDetail = ({ item, agregarAlCarrito }) => {
         >
           Personalizada(Dorsal y/o Parches)
         </Typography>
-        <Select
-          labelId="select-label"
-          onChange={handleChange}
-          defaultValue="no"
+        <Button
+          id="basic-button"
           variant="outlined"
-          className={styles.select}
           sx={{
-            border: " 1px solid white",
-            width: "100px",
-            color: "white",
-            appearance: "",
-            backgroundColor: "black",
-            background: "no repeat right white",
-            padding: "5px 12px",
+            width: "70px",
+            height: "50px",
+            textAlign: "center",
             fontFamily: "frontpageneue",
+            fontSize: "15px",
+            border: "1px solid white",
+            color: "white",
+            textTransform: "capitalize",
+            ":hover": { border: "1px solid var(--main)", color: "var(--main)" },
           }}
-          select
-          menuProps={{ color: "white" }}
-          IconComponent={ExpandMoreIcon}
+          aria-controls={open ? "basic-menu" : undefined}
+          // aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClickSelect}
         >
-          {/* <select style={}> */}
-          {/* <option>Hola</option>
-          <option>Hola</option>
-          <option>Hola</option> */}
+          {selectOption}
+          <ExpandMoreIcon />
+        </Button>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
           <MenuItem
-            value="no"
-            sx={{ backgroundColor: "black", color: "white" }}
+            value="No"
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              fontFamily: "frontpageneue",
+              ":hover": { color: "var(--main)" },
+            }}
             color="black"
           >
             No
           </MenuItem>
           <MenuItem
-            value="si"
-            sx={{ backgroundColor: "black", color: "white" }}
+            value="Si"
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              fontFamily: "frontpageneue",
+              ":hover": { color: "var(--main)" },
+            }}
           >
             Si
           </MenuItem>
-        </Select>
+        </Menu>
         <Typography
           variant="body2"
           sx={{ fontSize: "19px", fontFamily: "frontpageneue" }}
         >
           Cantidad
         </Typography>
+
+        <input
+          placeholder="1"
+          type="number"
+          className={styles.inputNumber}
+          ref={quantityRef}
+        ></input>
         <Button
           variant="outlined"
           sx={{
@@ -216,10 +256,13 @@ const ItemDetail = ({ item, agregarAlCarrito }) => {
               color: "gray",
             },
           }}
-          onClick={() => agregarAlCarrito(sizeOption, selectOption)}
+          onClick={() =>
+            agregarAlCarrito(sizeOption, selectOption, quantityRef)
+          }
         >
           Agregar a tu lista de deseos
         </Button>
+        <ToastContainer className={styles.toast} />
       </Box>
     </Box>
   );

@@ -24,7 +24,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.16.0",
     "react-spinners": "^0.13.8",
-    "sweetalert2": "^11.7.32"
+    "react-toastify": "^9.1.3",
+    "sweetalert2": "^11.6.13"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

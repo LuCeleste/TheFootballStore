@@ -5,13 +5,13 @@ const SizeButton = ({ size, setSizeOption }) => {
     <Button
       variant="outlined"
       sx={{
-        padding: "10px",
+        // padding: "10px",
         color: "white",
         fontSize: "15px",
         height: "55px",
         width: "55px",
         fontFamily: "Bebas neue",
-        p: "1",
+        // p: "1",
         borderColor: "white",
         ":hover": { color: "var(--main)", borderColor: "var(--main)" },
       }}
